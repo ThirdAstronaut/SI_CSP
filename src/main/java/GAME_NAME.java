@@ -1,0 +1,5 @@
+public enum GAME_NAME {
+
+    FUTOSHIKI, SKYSCRAPPER
+
+}
