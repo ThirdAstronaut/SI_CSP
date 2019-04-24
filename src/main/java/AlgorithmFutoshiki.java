@@ -40,7 +40,6 @@ public class AlgorithmFutoshiki {
     }
 
 
-
     private static void go(HashMap<Integer, List<Integer>> board, int row, int col) {
 
         if (checkAllConstraints(board) || isBoardFilled(board)) {
@@ -49,40 +48,38 @@ public class AlgorithmFutoshiki {
         }
 
         for (int j = 1; j < board.size() + 1; j++) {
-             if (Board.getBoard().get(row).get(col) == 0) {
-                 if (correctAssignment(row, col, j, board)) {
-                     board.get(row).set(col, j);
+            if (Board.getBoard().get(row).get(col) == 0) {
+                if (correctAssignment(row, col, j, board)) {
+                    board.get(row).set(col, j);
 
-                     int[] newField = selectNextField(row, col, board);
-                     if (newField[0] != -1) {
-                         go(board, newField[0], newField[1]);
+                    int[] newField = selectNextField(row, col, board);
+                    if (newField[0] != -1) {
+                        go(board, newField[0], newField[1]);
+                        }
 
-                         if (checkAllConstraints(board) || isBoardFilled(board)) {
-                             //Board.showBoard(GAME_NAME.FUTOSHIKI);
-                             Board.showBoard(GAME_NAME.FUTOSHIKI, board);
+                    if (checkAllConstraints(board) || isBoardFilled(board)) {
+                        //Board.showBoard(GAME_NAME.FUTOSHIKI);
+                      //  Board.showBoard(GAME_NAME.FUTOSHIKI, board);
 
-                             return;
-                         }
-                     }
+                        return;
+                    }
 
                     // if (Board.getBoard().get(newField[0]).get(newField[1]) == 0)
-                         board.get(row).set(col, 0);
+                    board.get(row).set(col, 0);
 
 
-                 } /*else j=1;*/
-             }
-             else {
-                 board.get(row).set(col, Board.getBoard().get(row).get(col));
+                } /*else j=1;*/
+            } else {
+                board.get(row).set(col, Board.getBoard().get(row).get(col));
 
-                 int[] newField = selectNextField(row, col, board);
-                 if (newField[0] != -1) {
-                     go(board, newField[0], newField[1]);
-                   }
+                int[] newField = selectNextField(row, col, board);
+                if (newField[0] != -1) {
+                    go(board, newField[0], newField[1]);
+                }
 
                   /*   if (Board.getBoard().get(newField[0]).get(newField[1]) == 0)
                          board.get(row).set(col, 0);*/
-
-             }
+            }
            /* else{
                 int[] newField = selectNextField(row, col, board);
                 if (newField[0] != -1)
@@ -93,18 +90,18 @@ public class AlgorithmFutoshiki {
                     return;
                 }
                 }*/
-            }
-
-
         }
 
-    private static boolean checkAllConstraints( HashMap<Integer,List<Integer>> currentBoard) {
 
-        if(isBoardFilled(currentBoard)){
+    }
 
-            for (int i = 1; i < currentBoard.size()+1; i++) {
-                for (int j = 1; j < currentBoard.size()+1; j++) {
-                    if(!checkConstraints(i, j, currentBoard.get(i).get(j),currentBoard)){
+    private static boolean checkAllConstraints(HashMap<Integer, List<Integer>> currentBoard) {
+
+        if (isBoardFilled(currentBoard)) {
+
+            for (int i = 1; i < currentBoard.size() + 1; i++) {
+                for (int j = 1; j < currentBoard.size() + 1; j++) {
+                    if (!checkConstraints(i, j, currentBoard.get(i).get(j), currentBoard)) {
                         return false;
                     }
 
@@ -121,13 +118,12 @@ public class AlgorithmFutoshiki {
     private static void goForward(HashMap<Integer, List<Integer>> board, int row, int col, HashMap<Integer, List<Domain>> domains) {
 
 
-
         if (isBoardFilled(board)) {
             //Board.showBoard(GAME_NAME.FUTOSHIKI);
             return;
         }
 
-for(Integer i : domains.get(row).get(col).getFieldDomain()){
+        for (Integer i : domains.get(row).get(col).getFieldDomain()) {
             if (Board.getBoard().get(row).get(col) == 0) {
                 if (correctAssignment(row, col, i, board)) {
                     board.get(row).set(col, i);
@@ -143,8 +139,7 @@ for(Integer i : domains.get(row).get(col).getFieldDomain()){
                     }
                 }
                 board.get(row).set(col, 0);
-            }
-            else {
+            } else {
                 board.get(row).set(col, Board.getBoard().get(row).get(col));
 
                 int[] newField = selectNextField(row, col, board);
@@ -172,21 +167,20 @@ for(Integer i : domains.get(row).get(col).getFieldDomain()){
     }
 
 
-private static boolean isDomainEmpty(Domain domain, HashMap<Integer, List<Integer>> currentBoard){
-    for (int i = 0; i < currentBoard.size(); i++) {
-        for (int j = 0; j < currentBoard.size(); j++) {
+    private static boolean isDomainEmpty(Domain domain, HashMap<Integer, List<Integer>> currentBoard) {
+        for (int i = 0; i < currentBoard.size(); i++) {
+            for (int j = 0; j < currentBoard.size(); j++) {
 
-            if(currentBoard.get(i).get(j) == 0){
+                if (currentBoard.get(i).get(j) == 0) {
 
-               // if()
+                    // if()
+
+                }
 
             }
-
         }
+        return true;
     }
-    return true;
-}
-
 
 
     public static int[] selectNextField(int row, int column, HashMap<Integer, List<Integer>> currentBoard) {
