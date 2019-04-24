@@ -4,13 +4,12 @@ import java.util.List;
 public class Field {
 
     private int id;
-    private int value;
     private int xCord;
     private int yCord;
     private List<Integer> fieldDomain;
 
-    Field(int value, int xCord, int yCord) {
-        this.value = value;
+    Field( int xCord, int yCord) {
+
         this.xCord = xCord;
         this.yCord = yCord;
         this.fieldDomain = new ArrayList<>();

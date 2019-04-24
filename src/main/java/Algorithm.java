@@ -3,12 +3,6 @@ import java.util.List;
 
 public class Algorithm {
 
-    public static List<Solution> futoshikiBacktracking(HashMap<Integer, List<Integer>> board) {
-
-        
-
-    }
-
     public static void skyscrapperBacktracking(HashMap<Integer, List<Integer>> board) {
 
 

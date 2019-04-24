@@ -23,7 +23,9 @@ public class Board {
             }
         } else {
             for (int i = 1; i < columns.size() + 1; i++) {
-                tmp.put(i, new ArrayList<>(Collections.nCopies(columns.size(), 0)));
+                List<Integer> list = new ArrayList<>(Collections.nCopies(columns.size()+1, 0));
+                list.set(0, -1);
+                tmp.put(i, list);
             }
             skyScrapperConstraints = columns;
         }
@@ -36,10 +38,15 @@ public class Board {
         this.size = size;
     }
 
-    public static void showBoard(GAME_NAME game_name) {
+    public static void showBoard(GAME_NAME game_name, HashMap<Integer, List<Integer>> board) {
         System.out.println(horizontal(game_name, false));
         for (int i = 1; i < board.size() + 1; i++) {
-            System.out.println(vertical(game_name, i, false) + Arrays.toString(board.get(i).toArray()) + " " + vertical(game_name, i, true));
+            System.out.print(vertical(game_name, i, false));
+            for (int j = 1; j < board.get(i).size(); j++) {
+                System.out.print(board.get(i).get(j)+" ");
+            }
+
+                    System.out.println(vertical(game_name, i, true));
         }
         System.out.println(horizontal(game_name, true));
 
@@ -57,10 +64,10 @@ public class Board {
     }
 
     private static String horizontal(GAME_NAME game_name, boolean last) {
-        StringBuilder columns = new StringBuilder("   ");
+        StringBuilder columns = new StringBuilder("  ");
         if (game_name.equals(GAME_NAME.FUTOSHIKI)) {
             for (int i = 1; i < board.size() + 1; i++) {
-                columns.append(i).append("  ");
+                columns.append(i).append(" ");
             }
             return columns.toString();
         } else {
@@ -68,7 +75,7 @@ public class Board {
             if (last)
                 getId = 1;
             for (Integer i : skyScrapperConstraints.get(getId)) {
-                columns.append(i).append("  ");
+                columns.append(i).append(" ");
             }
             return columns.toString();
         }
