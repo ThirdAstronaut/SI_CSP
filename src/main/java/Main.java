@@ -7,16 +7,17 @@ import java.util.List;
 
 public class Main {
 
-    private static final String FILE_NAME_BASE_TEST = "D:\\STUDIA\\Informatyka - wiz SEMESTR 6\\si\\2018 board\\lab2\\testowe\\";
-    private static final String FILE_NAME_BASE_RESEARCH = "D:\\STUDIA\\Informatyka - wiz SEMESTR 6\\si\\2018 board\\lab2\\badawcze\\";
+    static final String FILE_NAME_BASE_TEST = "D:\\STUDIA\\Informatyka - wiz SEMESTR 6\\si\\2018 board\\lab2\\testowe\\";
+    static final String FILE_NAME_BASE_RESEARCH = "D:\\STUDIA\\Informatyka - wiz SEMESTR 6\\si\\2018 board\\lab2\\badawcze\\";
 
 
-    private static final String FILE_NAME_SUFFIX = ".txt";
-    private static final String FUTUSHIKI_FILE_PREFIX_TEST = "futoshiki_";
-    private static final String FUTUSHIKI_FILE_PREFIX_RESEARCH = "test_futo_";
-    private static final String SKYSCRAPPER_FILE_PREFIX_TEST = "skyscrapper_";
-    private static List<String> filesNames;
-    private static int boardSize;
+    static final String FILE_NAME_SUFFIX = ".txt";
+    static final String FUTUSHIKI_FILE_PREFIX_TEST = "futoshiki_";
+    static final String FUTUSHIKI_FILE_PREFIX_RESEARCH = "test_futo_";
+    static final String SKYSCRAPPER_FILE_PREFIX_RESEARCH = "test_sky_";
+    static final String SKYSCRAPPER_FILE_PREFIX_TEST = "skyscrapper_";
+    static List<String> filesNames;
+    static int boardSize;
     static List<String[]> data = new ArrayList<>();
 
 
@@ -27,11 +28,15 @@ public class Main {
             Board.fillBoard(readDataFutoshiki(FILE_NAME_BASE_TEST + futoshikiFilesName + FILE_NAME_SUFFIX));
         }
 */
-         Board.fillBoard(readDataFutoshiki(FILE_NAME_BASE_RESEARCH + FUTUSHIKI_FILE_PREFIX_RESEARCH + filesNames.get(0) + FILE_NAME_SUFFIX), GAME_NAME.FUTOSHIKI);
+       //  Board.fillBoard(readDataFutoshiki(FILE_NAME_BASE_RESEARCH + FUTUSHIKI_FILE_PREFIX_RESEARCH + "6_1" + FILE_NAME_SUFFIX), GAME_NAME.FUTOSHIKI);
 //       System.out.println(FILE_NAME_BASE_TEST + FUTUSHIKI_FILE_PREFIX_RESEARCH + filesNames.get(0) + FILE_NAME_SUFFIX);
         // Board.showBoard(GAME_NAME.FUTOSHIKI, Board.getBoard());
-        System.out.println(FILE_NAME_BASE_RESEARCH + FUTUSHIKI_FILE_PREFIX_RESEARCH + filesNames.get(0) + FILE_NAME_SUFFIX);
-//        Board.fillBoard(readDataSkyscrapper(FILE_NAME_BASE_TEST + SKYSCRAPPER_FILE_PREFIX_TEST + filesNames.get(0) + FILE_NAME_SUFFIX), GAME_NAME.SKYSCRAPPER);
+//        System.out.println(FILE_NAME_BASE_RESEARCH + FUTUSHIKI_FILE_PREFIX_RESEARCH + filesNames.get(0) + FILE_NAME_SUFFIX);
+        Board.fillBoard(readDataSkyscrapper(FILE_NAME_BASE_RESEARCH + SKYSCRAPPER_FILE_PREFIX_RESEARCH + filesNames.get(0) + FILE_NAME_SUFFIX), GAME_NAME.SKYSCRAPPER);
+        String filename = FILE_NAME_BASE_RESEARCH + FUTUSHIKI_FILE_PREFIX_RESEARCH + "6_1" + FILE_NAME_SUFFIX;
+     //   Board.fillBoard(readDataSkyscrapper(filename), GAME_NAME.SKYSCRAPPER);
+        System.out.println(filename);
+
         //Board.showBoard(GAME_NAME.SKYSCRAPPER);
         //Algorithm.skyscrapperBacktracking(Board.getBoard());
         HashMap<Integer, List<Integer>> board = new HashMap<>();
@@ -39,8 +44,10 @@ public class Main {
             board.put(i, new ArrayList<>(Board.getBoard().get(i)));
         }
 
-    AlgorithmFutoshiki.futoshikiBacktracking(board);
-//        AlgorithmSkyscrapper.skyscrapperBacktracking(board);
+   // AlgorithmFutoshiki.futoshikiBacktracking(board);
+    //    AlgorithmSkyscrapper.skyscrapperBacktracking(board);
+        AlgorithmSkyscrapper.skyscrapperForwardchecking(board);
+   //     AlgorithmFutoshiki.futoshikiForwardchecking(board);
 
     }
 
@@ -113,7 +120,7 @@ public class Main {
     }
 
 
-    private static List<List<Integer>> readDataSkyscrapper(String fileName) {
+    static List<List<Integer>> readDataSkyscrapper(String fileName) {
         List<List<Integer>> constraints = null;
         try {
             BufferedReader in = new BufferedReader(new FileReader(fileName));
